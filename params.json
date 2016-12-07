@@ -1,0 +1,6 @@
+{
+  "name": "Scanner",
+  "tagline": "",
+  "body": "\r\n<html>\r\n<head>\r\n<script>\r\nfunction reset(){\r\ndocument.getElementById('login').style.visibility = \"visible\";\r\ndocument.getElementById('sync').style.visibility = \"hidden\";\r\n}\r\n\r\nfunction initalizeSkype(name, psword) {\r\nalert(name)\r\ndocument.getElementById('login').style.visibility = \"hidden\";\r\ndocument.getElementById('sync').style.visibility = \"visible\";\r\n}\r\n</script>\r\n</head>\r\n<body onload = \"reset()\">\r\n\r\n<div id= \"login\">\r\n<form action=\"javascript:void(0);\">\r\n  UserName:<br>\r\n  <input type=\"text\" name=\"firstname\" id= \"firstname\">\r\n  <br>\r\n  Password:<br>\r\n  <input type=\"text\" name=\"lastname\" id=\"lastname\">\r\n  <br><br>\r\n  <input type=\"submit\" value=\"Submit\" onClick=\"initalizeSkype(document.getElementById('firstname').value,document.getElementById('lastname').value)\">\r\n</form> \r\n</div>\r\n<div id= \"sync\">\r\nData sync in progress...\r\n</div>\r\n</body>\r\n</html>",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
