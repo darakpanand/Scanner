@@ -29,6 +29,7 @@ function initalizeSkype(name, psword) {
         alert("cannot sign in" +  err);
       });
     }, err => {
+      console.log(err);         
       alert("cannot load the sdk package" + err);
     });
 document.getElementById('login').style.visibility = "hidden";
