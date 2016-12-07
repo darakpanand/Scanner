@@ -1,14 +1,33 @@
 
 <html>
 <head>
-<script>
+<script src="https://swx.cdn.skype.com/shared/v/1.2.15/SkypeBootstrap.min.js">
 function reset(){
 document.getElementById('login').style.visibility = "visible";
 document.getElementById('sync').style.visibility = "hidden";
 }
 
 function initalizeSkype(name, psword) {
-alert(name)
+if (!location.hash) {
+            location.assign('https://login.windows.net/common/oauth2/authorize?response_type=token' +
+                '&client_id=88a947ae-8854-46d5-acd9-9068e543c2d5' +
+                '&redirect_uri='+ location.href +
+                '&resource=https://webdir.online.lync.com');
+        }
+   Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, api => {
+      var app = new api.application;
+
+      app.signInManager.signIn ({
+        username:  name,
+        password:  psword
+      }).then(() => {
+        alert("signed in as", app.personsAndGroupsManager.mePerson.displayName());
+      }, err => {
+        alert("cannot sign in", err);
+      });
+    }, err => {
+      alert("cannot load the sdk package", err);
+    });
 document.getElementById('login').style.visibility = "hidden";
 document.getElementById('sync').style.visibility = "visible";
 }
