@@ -22,7 +22,7 @@ function reset(){
 function initalizeSkype(name, psword) {
 if (location.hash) {         
    Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, api => {
-      var app = new api.application;
+      var app = new api.UIApplicationInstance;
       app.signInManager.signIn ({
         username:  name,
         password:  psword
