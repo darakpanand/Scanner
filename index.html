@@ -19,7 +19,7 @@ document.getElementById('sync').style.visibility = "hidden";
             }
 }
 function initalizeSkype(name, psword) {
-   Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, api => {
+  /* Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, api => {
       var app = new api.application;
       app.signInManager.signIn ({
         username:  name,
@@ -32,6 +32,23 @@ function initalizeSkype(name, psword) {
     }, err => {
       console.log(err);         
       alert("cannot load the sdk package" + err);
+    });*/
+   Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, function (api) {
+        window.skypeWebAppCtor = api.application;
+        window.skypeWebApp = new api.application();
+        //Make sign in table appear
+        // whenever client.state changes, display its value
+        window.skypeWebApp.signInManager.signIn ({
+        username:  name,
+        password:  psword
+       }).then(function () {
+     console.log('Signed in successfully.');
+      }, function (error) {
+     console.log('Failed to sign in.');
+      });
+    }, function (err) {
+        console.log(err);
+        alert('Cannot load the SDK.');
     });
 document.getElementById('login').style.visibility = "hidden";
 document.getElementById('sync').style.visibility = "visible";
