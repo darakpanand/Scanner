@@ -5,24 +5,22 @@
 <script>
 function reset(){
             if (!location.hash) {
+                 location.assign('https://login.windows.net/common/oauth2/authorize?response_type=token' +
+                '&client_id=88a947ae-8854-46d5-acd9-9068e543c2d5' +
+                '&redirect_uri='+ location.href +
+                '&resource=https://webdir.online.lync.com');
 document.getElementById('login').style.visibility = "visible";
 document.getElementById('sync').style.visibility = "hidden";
             } else {
-           document.getElementById('login').style.visibility = "hidden";
+           document.getElementById('login').style.visibility = "visible";
            document.getElementById('sync').innerHTML =  document.getElementById('sync').innerHTML + location.hash;           
             }
 }
 
 function initalizeSkype(name, psword) {
-if (!location.hash) {
-            location.assign('https://login.windows.net/common/oauth2/authorize?response_type=token' +
-                '&client_id=88a947ae-8854-46d5-acd9-9068e543c2d5' +
-                '&redirect_uri='+ location.href +
-                '&resource=https://webdir.online.lync.com');
-        }
+if (location.hash) {
    Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, api => {
       var app = new api.application;
-
       app.signInManager.signIn ({
         username:  name,
         password:  psword
@@ -34,6 +32,7 @@ if (!location.hash) {
     }, err => {
       alert("cannot load the sdk package", err);
     });
+}
 document.getElementById('login').style.visibility = "hidden";
 document.getElementById('sync').style.visibility = "visible";
 }
