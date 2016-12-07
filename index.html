@@ -9,6 +9,7 @@
   <!-- This is the Skype Web SDK -->
   <script src="https://swx.cdn.skype.com/shared/v/1.1.23.0/SkypeBootstrap.js"></script>
 <script>
+  var app;
 function reset(){
             if (!location.hash) {
                          location.assign('https://login.windows.net/common/oauth2/authorize?response_type=token' +
@@ -24,7 +25,7 @@ document.getElementById('sync').style.visibility = "hidden";
 }
 function initalizeSkype(name, psword) {
    Skype.initialize({ apiKey: '88a947ae-8854-46d5-acd9-9068e543c2d5' }, api => {
-      var app = new api.application();
+      app = new api.application();
       app.signInManager.signIn ({
         username:  name,
         password:  psword
@@ -38,6 +39,16 @@ function initalizeSkype(name, psword) {
       alert("cannot load the sdk package" + err);
     });
 }
+function signOut(){
+  app.signInManager.signOut()
+.then(function () {
+//log out worked!
+alert('Logged out!');
+}, function (error) {
+//Something went wrong.
+alert(error);
+});
+}
 </script>
 </head>
 <body onload = "reset()">
@@ -50,8 +61,9 @@ function initalizeSkype(name, psword) {
   Password:<br>
   <input type="text" name="lastname" id="lastname">
   <br><br>
-  <input type="submit" value="Submit" onClick="initalizeSkype(document.getElementById('firstname').value,document.getElementById('lastname').value)">
+  <input type="submit" value="Signin" onClick="initalizeSkype(document.getElementById('firstname').value,document.getElementById('lastname').value)">
 </form> 
+  <input type="submit" value="Signout" onClick="signOut()">
 </div>
 <div id= "sync">
 Data sync in progress...
