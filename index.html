@@ -31,6 +31,8 @@ apps.signInManager.state.changed(function (state) {
 $('#loginStatus').text("Login State: " + state);
 });
     }, err => {
+     //point of error occurence
+     //Configuration service did not find any configuration that matches parameters or configuration service response is invalid"
       console.log(err);         
       alert("cannot load the sdk package" + err);
     });
